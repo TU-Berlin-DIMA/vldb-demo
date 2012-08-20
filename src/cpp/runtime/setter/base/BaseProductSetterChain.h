@@ -30,7 +30,7 @@ public:
     // runtime component typedefs
     // runtime components for setter `set_pk`
     typedef ConstRangeProvider< I64u, Product > RangeProvider01Type;
-    typedef ClusteredValueProvider< I64u, Product, UniformPrFunction, RangeProvider01Type > ValueProvider01Type;
+    typedef ClusteredValueProvider< I64u, Product, UniformPrFunction<I64u>, RangeProvider01Type > ValueProvider01Type;
     typedef FieldSetter< Product, RecordTraits<Product>::PK, ValueProvider01Type > SetPkType;
     // runtime components for setter `set_name`
     typedef CallbackValueProvider< String, Product, BaseProductSetterChain > ValueProvider02Type;
@@ -46,7 +46,7 @@ public:
         SetterChain<Product>(opMode, random),
         _sequenceCardinality(config.cardinality("product")),
         _rangeProvider01(0, config.parameter<I64u>("product.sequence.cardinality")),
-        _valueProvider01(config.function< UniformPrFunction >("Pr[product.pk]"), _rangeProvider01),
+        _valueProvider01(config.function< UniformPrFunction<I64u> >("Pr[product.pk]"), _rangeProvider01),
         _setPk(_valueProvider01),
         _valueProvider02(*this, &BaseProductSetterChain::setProductName, 0),
         _setName(_valueProvider02),

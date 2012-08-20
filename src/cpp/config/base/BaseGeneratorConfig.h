@@ -43,19 +43,19 @@ protected:
         function(new CombinedPrFunction<Enum>("Pr[customer.gender]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/customer/gender.distribution")));
         function(new CombinedPrFunction<Enum>("Pr[customer.last_name]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/demographics/last_name.distribution")));
         function(new CombinedPrFunction<I32u>("Pr[customer.orders_count]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/customer/orders_count.distribution")));
-        function(new UniformPrFunction("Pr[customer.pk]", 1, static_cast<I64u>(parameter<I64u>("customer.sequence.cardinality") + 1)));
+        function(new UniformPrFunction<I64u>("Pr[customer.pk]", 1, static_cast<I64u>(parameter<I64u>("customer.sequence.cardinality") + 1)));
         function(new CombinedPrFunction<Decimal>("Pr[lineitem.discount]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/lineitem/discount.distribution")));
-        function(new UniformPrFunction("Pr[lineitem.pk]", 1, static_cast<I64u>(parameter<I64u>("lineitem.sequence.cardinality") + 1)));
-        function(new UniformPrFunction("Pr[lineitem.product]", 0, parameter<I64u>("lineitem.sequence.cardinality")));
+        function(new UniformPrFunction<I64u>("Pr[lineitem.pk]", 1, static_cast<I64u>(parameter<I64u>("lineitem.sequence.cardinality") + 1)));
+        function(new UniformPrFunction<I64u>("Pr[lineitem.product]", 0, parameter<I64u>("lineitem.sequence.cardinality")));
         function(new CombinedPrFunction<I16u>("Pr[lineitem.quantity]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/lineitem/quantity.distribution")));
-        function(new UniformPrFunction("Pr[lineitem.ship_date_offset]", 0, 15));
+        function(new UniformPrFunction<I16u>("Pr[lineitem.ship_date_offset]", 0, 15));
         function(new CombinedPrFunction<Decimal>("Pr[lineitem.tax]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/lineitem/tax.distribution")));
         function(new CombinedPrFunction<I32u>("Pr[order.lineitems_count]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/order/lineitems_count.distribution")));
-        function(new UniformPrFunction("Pr[order.order_date]", 2012-01-01, 2012-07-01));
-        function(new UniformPrFunction("Pr[order.pk]", 1, static_cast<I64u>(parameter<I64u>("order.sequence.cardinality") + 1)));
-        function(new UniformPrFunction("Pr[order.product_pk]", 1, static_cast<I64u>(parameter<I64u>("product.sequence.cardinality") + 1)));
+        function(new UniformPrFunction<Date>("Pr[order.order_date]", Date("2012-01-01"), Date("2012-07-01")));
+        function(new UniformPrFunction<I64u>("Pr[order.pk]", 1, static_cast<I64u>(parameter<I64u>("order.sequence.cardinality") + 1)));
+        function(new UniformPrFunction<I64u>("Pr[order.product_pk]", 1, static_cast<I64u>(parameter<I64u>("product.sequence.cardinality") + 1)));
         function(new CombinedPrFunction<Enum>("Pr[order.status]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/order/status.distribution")));
-        function(new UniformPrFunction("Pr[product.pk]", 1, static_cast<I64u>(parameter<I64u>("product.sequence.cardinality") + 1)));
+        function(new UniformPrFunction<I64u>("Pr[product.pk]", 1, static_cast<I64u>(parameter<I64u>("product.sequence.cardinality") + 1)));
         function(new CombinedPrFunction<Decimal>("Pr[product.retail_price]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/product/price.distribution")));
         function(new CombinedPrFunction<Enum>("Pr[product.type]", static_cast<String>(parameter<String>("ENV.config-dir") + "/distributions/core/retail/category.distribution")));
     }

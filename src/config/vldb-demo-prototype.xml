@@ -250,16 +250,22 @@
             </argument>
           </argument>
         </setter>
+        <setter key='set_status' type='field_setter'>
+          <argument key='field' type='field_ref' ref='order:status' />
+          <argument key='value' type='random_value_provider'>
+            <argument key='probability' type='function_ref' ref='Pr[order.status]' />
+          </argument>
+        </setter>
         <setter key='set_total_price' type='field_setter'>
           <argument key='field' type='field_ref' ref='order:total_price' />
           <argument key='value' type='const_value_provider'>
             <argument key='value' type='Decimal' value='0' /> <!-- FIXME -->
           </argument>
         </setter>
-        <setter key='set_status' type='field_setter'>
-          <argument key='field' type='field_ref' ref='order:status' />
+        <setter key='set_order_date' type='field_setter'>
+          <argument key='field' type='field_ref' ref='order:order_date' />
           <argument key='value' type='random_value_provider'>
-            <argument key='probability' type='function_ref' ref='Pr[order.status]' />
+            <argument key='probability' type='function_ref' ref='Pr[order.order_date]' />
           </argument>
         </setter>
         <setter key='set_lineitems_count' type='field_setter'>

@@ -29,7 +29,7 @@ public:
     // runtime component typedefs
     // runtime components for setter `set_pk`
     typedef ConstRangeProvider< I64u, Customer > RangeProvider01Type;
-    typedef ClusteredValueProvider< I64u, Customer, UniformPrFunction, RangeProvider01Type > ValueProvider01Type;
+    typedef ClusteredValueProvider< I64u, Customer, UniformPrFunction<I64u>, RangeProvider01Type > ValueProvider01Type;
     typedef FieldSetter< Customer, RecordTraits<Customer>::PK, ValueProvider01Type > SetPkType;
     // runtime components for setter `set_gender`
     typedef RandomValueProvider< Enum, Customer, CombinedPrFunction<Enum>, 0 > ValueProvider02Type;
@@ -51,7 +51,7 @@ public:
         SetterChain<Customer>(opMode, random),
         _sequenceCardinality(config.cardinality("customer")),
         _rangeProvider01(0, config.parameter<I64u>("customer.sequence.cardinality")),
-        _valueProvider01(config.function< UniformPrFunction >("Pr[customer.pk]"), _rangeProvider01),
+        _valueProvider01(config.function< UniformPrFunction<I64u> >("Pr[customer.pk]"), _rangeProvider01),
         _setPk(_valueProvider01),
         _valueProvider02(config.function< CombinedPrFunction<Enum> >("Pr[customer.gender]")),
         _setGender(_valueProvider02),

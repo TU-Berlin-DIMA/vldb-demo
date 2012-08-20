@@ -34,39 +34,44 @@ public:
     // runtime component typedefs
     // runtime components for setter `set_pk`
     typedef ConstRangeProvider< I64u, Order > RangeProvider01Type;
-    typedef ClusteredValueProvider< I64u, Order, UniformPrFunction, RangeProvider01Type > ValueProvider01Type;
+    typedef ClusteredValueProvider< I64u, Order, UniformPrFunction<I64u>, RangeProvider01Type > ValueProvider01Type;
     typedef FieldSetter< Order, RecordTraits<Order>::PK, ValueProvider01Type > SetPkType;
     // runtime components for setter `set_customer`
     typedef ContextFieldValueProvider< I32u, Customer, RecordTraits<Customer>::ORDERS_COUNT > ValueProvider02Type;
     typedef ConstValueProvider< I32u, Order > ValueProvider03Type;
     typedef ClusteredReferenceProvider< Customer, Order, ValueProvider02Type, 0 > ReferenceProvider01Type;
     typedef ReferenceSetter< Order, RecordTraits<Order>::CUSTOMER, ReferenceProvider01Type > SetCustomerType;
-    // runtime components for setter `set_total_price`
-    typedef ConstValueProvider< Decimal, Order > ValueProvider04Type;
-    typedef FieldSetter< Order, RecordTraits<Order>::TOTAL_PRICE, ValueProvider04Type > SetTotalPriceType;
     // runtime components for setter `set_status`
-    typedef RandomValueProvider< Enum, Order, CombinedPrFunction<Enum>, 0 > ValueProvider05Type;
-    typedef FieldSetter< Order, RecordTraits<Order>::STATUS, ValueProvider05Type > SetStatusType;
+    typedef RandomValueProvider< Enum, Order, CombinedPrFunction<Enum>, 0 > ValueProvider04Type;
+    typedef FieldSetter< Order, RecordTraits<Order>::STATUS, ValueProvider04Type > SetStatusType;
+    // runtime components for setter `set_total_price`
+    typedef ConstValueProvider< Decimal, Order > ValueProvider05Type;
+    typedef FieldSetter< Order, RecordTraits<Order>::TOTAL_PRICE, ValueProvider05Type > SetTotalPriceType;
+    // runtime components for setter `set_order_date`
+    typedef RandomValueProvider< Date, Order, UniformPrFunction<Date>, 0 > ValueProvider06Type;
+    typedef FieldSetter< Order, RecordTraits<Order>::ORDER_DATE, ValueProvider06Type > SetOrderDateType;
     // runtime components for setter `set_lineitems_count`
-    typedef RandomValueProvider< I32u, Order, CombinedPrFunction<I32u>, 0 > ValueProvider06Type;
-    typedef FieldSetter< Order, RecordTraits<Order>::LINEITEMS_COUNT, ValueProvider06Type > SetLineitemsCountType;
+    typedef RandomValueProvider< I32u, Order, CombinedPrFunction<I32u>, 0 > ValueProvider07Type;
+    typedef FieldSetter< Order, RecordTraits<Order>::LINEITEMS_COUNT, ValueProvider07Type > SetLineitemsCountType;
 
     BaseOrderSetterChain(OperationMode& opMode, RandomStream& random, GeneratorConfig& config) :
         SetterChain<Order>(opMode, random),
         _sequenceCardinality(config.cardinality("order")),
         _rangeProvider01(0, config.parameter<I64u>("order.sequence.cardinality")),
-        _valueProvider01(config.function< UniformPrFunction >("Pr[order.pk]"), _rangeProvider01),
+        _valueProvider01(config.function< UniformPrFunction<I64u> >("Pr[order.pk]"), _rangeProvider01),
         _setPk(_valueProvider01),
         _valueProvider02(),
         _valueProvider03(config.parameter<I32u>("customer.sequence.max_orders_per_customer")),
         _referenceProvider01(_valueProvider03, _valueProvider02, config.generatorPool().get<CustomerGenerator>().inspector()),
         _setCustomer(_referenceProvider01),
-        _valueProvider04(0),
-        _setTotalPrice(_valueProvider04),
-        _valueProvider05(config.function< CombinedPrFunction<Enum> >("Pr[order.status]")),
-        _setStatus(_valueProvider05),
-        _valueProvider06(config.function< CombinedPrFunction<I32u> >("Pr[order.lineitems_count]")),
-        _setLineitemsCount(_valueProvider06),
+        _valueProvider04(config.function< CombinedPrFunction<Enum> >("Pr[order.status]")),
+        _setStatus(_valueProvider04),
+        _valueProvider05(0),
+        _setTotalPrice(_valueProvider05),
+        _valueProvider06(config.function< UniformPrFunction<Date> >("Pr[order.order_date]")),
+        _setOrderDate(_valueProvider06),
+        _valueProvider07(config.function< CombinedPrFunction<I32u> >("Pr[order.lineitems_count]")),
+        _setLineitemsCount(_valueProvider07),
         _logger(Logger::get("order.setter.chain"))
     {
     }
@@ -87,8 +92,9 @@ public:
         // apply setter chain
         me->_setPk(recordPtr, me->_random);
         me->_setCustomer(recordPtr, me->_random);
-        me->_setTotalPrice(recordPtr, me->_random);
         me->_setStatus(recordPtr, me->_random);
+        me->_setTotalPrice(recordPtr, me->_random);
+        me->_setOrderDate(recordPtr, me->_random);
         me->_setLineitemsCount(recordPtr, me->_random);
     }
 
@@ -101,8 +107,9 @@ public:
 
         // apply inverse setter chain
         _setPk.filterRange(predicate, result);
-        _setTotalPrice.filterRange(predicate, result);
         _setStatus.filterRange(predicate, result);
+        _setTotalPrice.filterRange(predicate, result);
+        _setOrderDate.filterRange(predicate, result);
         _setLineitemsCount.filterRange(predicate, result);
 
         return result;
@@ -124,16 +131,20 @@ protected:
     ReferenceProvider01Type _referenceProvider01;
     SetCustomerType _setCustomer;
 
-    // runtime components for setter `set_total_price`
-    ValueProvider04Type _valueProvider04;
-    SetTotalPriceType _setTotalPrice;
-
     // runtime components for setter `set_status`
-    ValueProvider05Type _valueProvider05;
+    ValueProvider04Type _valueProvider04;
     SetStatusType _setStatus;
 
-    // runtime components for setter `set_lineitems_count`
+    // runtime components for setter `set_total_price`
+    ValueProvider05Type _valueProvider05;
+    SetTotalPriceType _setTotalPrice;
+
+    // runtime components for setter `set_order_date`
     ValueProvider06Type _valueProvider06;
+    SetOrderDateType _setOrderDate;
+
+    // runtime components for setter `set_lineitems_count`
+    ValueProvider07Type _valueProvider07;
     SetLineitemsCountType _setLineitemsCount;
 
     // Logger instance.

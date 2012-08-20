@@ -38,7 +38,7 @@ public:
     // runtime component typedefs
     // runtime components for setter `set_pk`
     typedef ConstRangeProvider< I64u, Lineitem > RangeProvider01Type;
-    typedef ClusteredValueProvider< I64u, Lineitem, UniformPrFunction, RangeProvider01Type > ValueProvider01Type;
+    typedef ClusteredValueProvider< I64u, Lineitem, UniformPrFunction<I64u>, RangeProvider01Type > ValueProvider01Type;
     typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::PK, ValueProvider01Type > SetPkType;
     // runtime components for setter `set_order`
     typedef ContextFieldValueProvider< I32u, Order, RecordTraits<Order>::LINEITEMS_COUNT > ValueProvider02Type;
@@ -46,7 +46,7 @@ public:
     typedef ClusteredReferenceProvider< Order, Lineitem, ValueProvider02Type, 0 > ReferenceProvider01Type;
     typedef ReferenceSetter< Lineitem, RecordTraits<Lineitem>::ORDER, ReferenceProvider01Type > SetOrderType;
     // runtime components for setter `set_product`
-    typedef RandomValueProvider< I64u, Lineitem, UniformPrFunction, 0 > ValueProvider04Type;
+    typedef RandomValueProvider< I64u, Lineitem, UniformPrFunction<I64u>, 0 > ValueProvider04Type;
     typedef EqualityPredicateFieldBinder< Product, RecordTraits<Product>::PK, Lineitem, ValueProvider04Type > PredicateBinder01Type;
     typedef EqualityPredicateProvider< Product, Lineitem > PredicateProvider01Type;
     typedef RandomReferenceProvider< Product, Lineitem > ReferenceProvider02Type;
@@ -61,20 +61,20 @@ public:
     typedef RandomValueProvider< Decimal, Lineitem, CombinedPrFunction<Decimal>, 0 > ValueProvider07Type;
     typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::DISCOUNT, ValueProvider07Type > SetDiscountType;
     // runtime components for setter `set_ship_date_offset`
-    typedef RandomValueProvider< I16u, Lineitem, UniformPrFunction, 0 > ValueProvider08Type;
+    typedef RandomValueProvider< I16u, Lineitem, UniformPrFunction<I16u>, 0 > ValueProvider08Type;
     typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::SHIP_DATE_OFFSET, ValueProvider08Type > SetShipDateOffsetType;
 
     BaseLineitemSetterChain(OperationMode& opMode, RandomStream& random, GeneratorConfig& config) :
         SetterChain<Lineitem>(opMode, random),
         _sequenceCardinality(config.cardinality("lineitem")),
         _rangeProvider01(0, config.parameter<I64u>("lineitem.sequence.cardinality")),
-        _valueProvider01(config.function< UniformPrFunction >("Pr[lineitem.pk]"), _rangeProvider01),
+        _valueProvider01(config.function< UniformPrFunction<I64u> >("Pr[lineitem.pk]"), _rangeProvider01),
         _setPk(_valueProvider01),
         _valueProvider02(),
         _valueProvider03(config.parameter<I32u>("order.sequence.max_lineitems_per_order")),
         _referenceProvider01(_valueProvider03, _valueProvider02, config.generatorPool().get<OrderGenerator>().inspector()),
         _setOrder(_referenceProvider01),
-        _valueProvider04(config.function< UniformPrFunction >("Pr[order.product_pk]")),
+        _valueProvider04(config.function< UniformPrFunction<I64u> >("Pr[order.product_pk]")),
         _predicateBinder01(_valueProvider04),
         _predicateProvider01(config.generatorPool().get<ProductGenerator>().recordFactory(), _predicateBinder01),
         _referenceProvider02(_predicateProvider01, config.generatorPool().get<ProductGenerator>().inspector()),
@@ -85,7 +85,7 @@ public:
         _setTax(_valueProvider06),
         _valueProvider07(config.function< CombinedPrFunction<Decimal> >("Pr[lineitem.discount]")),
         _setDiscount(_valueProvider07),
-        _valueProvider08(config.function< UniformPrFunction >("Pr[lineitem.ship_date_offset]")),
+        _valueProvider08(config.function< UniformPrFunction<I16u> >("Pr[lineitem.ship_date_offset]")),
         _setShipDateOffset(_valueProvider08),
         _logger(Logger::get("lineitem.setter.chain"))
     {
