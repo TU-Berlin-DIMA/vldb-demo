@@ -1,0 +1,12 @@
+# Probability for the number of lineitems per order.
+
+@numberofexactvals = 7
+@numberofbins = 0
+@nullprobability = 0.0
+p(X) = 0.100  for X = { 1 }               # 1 lineitem
+p(X) = 0.200  for X = { 2 }               # 2 lineitems
+p(X) = 0.300  for X = { 3 }               # 3 lineitems
+p(X) = 0.100  for X = { 4 }               # 4 lineitems
+p(X) = 0.200  for X = { 5 }               # 5 lineitems
+p(X) = 0.050  for X = { 6 }               # 6 lineitems
+p(X) = 0.050  for X = { 7 }               # 7 lineitems

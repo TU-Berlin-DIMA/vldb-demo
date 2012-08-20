@@ -1,0 +1,16 @@
+@numberofexactvals = 13
+@numberofbins = 0
+@nullprobability = 0.0
+p(X) = 0.10                      for X = { 0  } # Other or unknown 
+p(X) = 0.08                      for X = { 1  } # Department store
+p(X) = 0.07                      for X = { 2  } # Electronics 
+p(X) = 0.02                      for X = { 3  } # Housewares
+p(X) = 0.03                      for X = { 4  } # Jewelry
+p(X) = 0.10                      for X = { 5  } # Clothing
+p(X) = 0.10                      for X = { 6  } # Footwear
+p(X) = 0.13                      for X = { 7  } # Food/Beverage
+p(X) = 0.10                      for X = { 8  } # Entertainment (movies, concerts, etc.)
+p(X) = 0.10                      for X = { 9  } # Gas Station
+p(X) = 0.07                      for X = { 10 } # Transportation
+p(X) = 0.04                      for X = { 11 } # Lodging
+p(X) = 0.06                      for X = { 12 } # iTunes

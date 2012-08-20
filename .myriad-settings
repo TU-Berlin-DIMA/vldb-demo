@@ -1,0 +1,4 @@
+# the data generator name
+MYRIAD_DGEN_NAME = vldb-demo
+MYRIAD_DGEN_NS   = VLDBDemo
+MYRIAD_IS_ARCH64 = True

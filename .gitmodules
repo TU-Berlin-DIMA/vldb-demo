@@ -1,0 +1,3 @@
+[submodule "vendor/myriad-toolkit"]
+	path = vendor/myriad-toolkit
+	url = git@bitbucket.org:aalexandrov/myriad-toolkit.git

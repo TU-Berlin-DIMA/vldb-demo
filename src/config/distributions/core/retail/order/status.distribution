@@ -1,0 +1,6 @@
+@numberofexactvals = 3
+@numberofbins = 0
+@nullprobability = 0.0
+p(X) = 0.300                     for X = { 0 } # O
+p(X) = 0.500                     for X = { 1 } # S
+p(X) = 0.200                     for X = { 1 } # A
