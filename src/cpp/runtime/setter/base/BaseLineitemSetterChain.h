@@ -13,6 +13,7 @@
 #include "runtime/provider/range/ConstRangeProvider.h"
 #include "runtime/provider/reference/ClusteredReferenceProvider.h"
 #include "runtime/provider/reference/RandomReferenceProvider.h"
+#include "runtime/provider/value/CallbackValueProvider.h"
 #include "runtime/provider/value/ClusteredValueProvider.h"
 #include "runtime/provider/value/ConstValueProvider.h"
 #include "runtime/provider/value/ContextFieldValueProvider.h"
@@ -60,9 +61,12 @@ public:
     // runtime components for setter `set_discount`
     typedef RandomValueProvider< Decimal, Lineitem, CombinedPrFunction<Decimal>, 0 > ValueProvider07Type;
     typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::DISCOUNT, ValueProvider07Type > SetDiscountType;
+    // runtime components for setter `set_price`
+    typedef CallbackValueProvider< Decimal, Lineitem, BaseLineitemSetterChain > ValueProvider08Type;
+    typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::PRICE, ValueProvider08Type > SetPriceType;
     // runtime components for setter `set_ship_date_offset`
-    typedef RandomValueProvider< I16u, Lineitem, UniformPrFunction<I16u>, 0 > ValueProvider08Type;
-    typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::SHIP_DATE_OFFSET, ValueProvider08Type > SetShipDateOffsetType;
+    typedef RandomValueProvider< I16u, Lineitem, UniformPrFunction<I16u>, 0 > ValueProvider09Type;
+    typedef FieldSetter< Lineitem, RecordTraits<Lineitem>::SHIP_DATE_OFFSET, ValueProvider09Type > SetShipDateOffsetType;
 
     BaseLineitemSetterChain(OperationMode& opMode, RandomStream& random, GeneratorConfig& config) :
         SetterChain<Lineitem>(opMode, random),
@@ -85,8 +89,10 @@ public:
         _setTax(_valueProvider06),
         _valueProvider07(config.function< CombinedPrFunction<Decimal> >("Pr[lineitem.discount]")),
         _setDiscount(_valueProvider07),
-        _valueProvider08(config.function< UniformPrFunction<I16u> >("Pr[lineitem.ship_date_offset]")),
-        _setShipDateOffset(_valueProvider08),
+        _valueProvider08(*this, &BaseLineitemSetterChain::setPrice, 0),
+        _setPrice(_valueProvider08),
+        _valueProvider09(config.function< UniformPrFunction<I16u> >("Pr[lineitem.ship_date_offset]")),
+        _setShipDateOffset(_valueProvider09),
         _logger(Logger::get("lineitem.setter.chain"))
     {
     }
@@ -111,6 +117,7 @@ public:
         me->_setQuantity(recordPtr, me->_random);
         me->_setTax(recordPtr, me->_random);
         me->_setDiscount(recordPtr, me->_random);
+        me->_setPrice(recordPtr, me->_random);
         me->_setShipDateOffset(recordPtr, me->_random);
     }
 
@@ -126,10 +133,13 @@ public:
         _setQuantity.filterRange(predicate, result);
         _setTax.filterRange(predicate, result);
         _setDiscount.filterRange(predicate, result);
+        _setPrice.filterRange(predicate, result);
         _setShipDateOffset.filterRange(predicate, result);
 
         return result;
     }
+
+    virtual Decimal setPrice(const AutoPtr<Lineitem>& recordPtr, RandomStream& random) = 0;
 
 protected:
 
@@ -166,8 +176,12 @@ protected:
     ValueProvider07Type _valueProvider07;
     SetDiscountType _setDiscount;
 
-    // runtime components for setter `set_ship_date_offset`
+    // runtime components for setter `set_price`
     ValueProvider08Type _valueProvider08;
+    SetPriceType _setPrice;
+
+    // runtime components for setter `set_ship_date_offset`
+    ValueProvider09Type _valueProvider09;
     SetShipDateOffsetType _setShipDateOffset;
 
     // Logger instance.

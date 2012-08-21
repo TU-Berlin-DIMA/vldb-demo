@@ -23,6 +23,11 @@ public:
     virtual ~LineitemSetterChain()
     {
     }
+
+    virtual Decimal setPrice(const AutoPtr<Lineitem>& recordPtr, RandomStream& random)
+    {
+    	return (1.0 - recordPtr->discount() + recordPtr->tax()) * recordPtr->product()->retailPrice();
+    }
 };
 
 } // namespace VLDBDemo

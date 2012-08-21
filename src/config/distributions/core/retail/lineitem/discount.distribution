@@ -1,6 +1,7 @@
-@numberofexactvals = 3
+@numberofexactvals = 4
 @numberofbins = 0
 @nullprobability = 0.0
-p(X) = 0.300                     for X = { 0.05 } # 5%
-p(X) = 0.400                     for X = { 0.10 } # 10%
-p(X) = 0.300                     for X = { 0.20 } # 20%
+p(X) = 0.700                     for X = { 0.00 } # no discount
+p(X) = 0.150                     for X = { 0.10 } # 10% discount
+p(X) = 0.100                     for X = { 0.25 } # 25% discount
+p(X) = 0.050                     for X = { 0.50 } # 50% discount

@@ -346,6 +346,14 @@
             <argument key='probability' type='function_ref' ref='Pr[lineitem.discount]' />
           </argument>
         </setter>
+        <setter key='set_price' type='field_setter'>
+          <argument key='field' type='field_ref' ref='lineitem:price' />
+          <argument key='value' type='callback_value_provider'>
+            <argument key='type' type='String' value='Decimal' />
+            <argument key='name' type='String' value='setPrice' />
+            <argument key='arity' type='I16u' value='0' />
+          </argument>
+        </setter>
         <setter key='set_ship_date_offset' type='field_setter'>
           <argument key='field' type='field_ref' ref='lineitem:ship_date_offset' />
           <argument key='value' type='random_value_provider'>

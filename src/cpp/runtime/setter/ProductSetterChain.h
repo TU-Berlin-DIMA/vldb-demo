@@ -26,7 +26,7 @@ public:
 
     virtual String setProductName(const AutoPtr<Product>& recordPtr, RandomStream& random)
     {
-        return "";
+        return format("PRODUCT #%06Lu", recordPtr->pk());
     }
 };
 
