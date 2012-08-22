@@ -3,6 +3,8 @@
 
 #include "runtime/setter/base/BaseProductSetterChain.h"
 
+#include <Poco/NumberFormatter.h>
+
 using namespace Myriad;
 
 namespace VLDBDemo {
@@ -16,7 +18,8 @@ class ProductSetterChain : public BaseProductSetterChain
 public:
 
     ProductSetterChain(OperationMode& opMode, RandomStream& random, GeneratorConfig& config) :
-        BaseProductSetterChain(opMode, random, config)
+        BaseProductSetterChain(opMode, random, config),
+    	_productNamePrefix("PRODUCT #")
     {
     }
 
@@ -26,8 +29,14 @@ public:
 
     virtual String setProductName(const AutoPtr<Product>& recordPtr, RandomStream& random)
     {
-        return format("PRODUCT #%06Lu", recordPtr->pk());
+    	String productName(_productNamePrefix);
+    	NumberFormatter::append0(productName, recordPtr->pk(), 6);
+        return productName;
     }
+
+private:
+
+    const String _productNamePrefix;
 };
 
 } // namespace VLDBDemo
