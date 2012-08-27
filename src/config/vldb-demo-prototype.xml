@@ -112,6 +112,7 @@
     </enum_set>
   </enum_sets>
 
+  <!-- record sequences configuration -->
   <record_sequences>
     <!-- customers -->
     <random_sequence key='customer'>
