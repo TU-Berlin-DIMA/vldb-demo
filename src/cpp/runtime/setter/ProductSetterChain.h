@@ -19,7 +19,7 @@ public:
 
     ProductSetterChain(OperationMode& opMode, RandomStream& random, GeneratorConfig& config) :
         BaseProductSetterChain(opMode, random, config),
-    	_productNamePrefix("PRODUCT #")
+        _productNamePrefix("PRODUCT #")
     {
     }
 
@@ -29,8 +29,8 @@ public:
 
     virtual String setProductName(const AutoPtr<Product>& recordPtr, RandomStream& random)
     {
-    	String productName(_productNamePrefix);
-    	NumberFormatter::append0(productName, recordPtr->pk(), 6);
+        String productName(_productNamePrefix);
+        NumberFormatter::append0(productName, recordPtr->pk(), 6);
         return productName;
     }
 

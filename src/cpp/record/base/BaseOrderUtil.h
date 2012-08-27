@@ -16,8 +16,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::PK, VLDBDemo::Order>
 {
     typedef I64u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -35,8 +35,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::STATUS, VLDBDemo::Order>
 {
     typedef Enum FieldType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -54,8 +54,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::TOTAL_PRICE, VLDBDemo::Order>
 {
     typedef Decimal FieldType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -73,8 +73,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::ORDER_DATE, VLDBDemo::Order>
 {
     typedef Date FieldType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -92,8 +92,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::LINEITEMS_COUNT, VLDBDemo::Order>
 {
     typedef I32u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -112,8 +112,8 @@ struct RecordFieldTraits<RecordTraits<VLDBDemo::Order>::CUSTOMER, VLDBDemo::Orde
 {
     typedef VLDBDemo::Customer FieldType;
     // record field getter / setter types
-    typedef typename MethodTraits<VLDBDemo::Order, AutoPtr<FieldType> >::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Order, AutoPtr<FieldType> >::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Order, AutoPtr<FieldType> >::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Order, AutoPtr<FieldType> >::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {

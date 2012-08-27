@@ -16,8 +16,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Product>::PK, VLDBDemo::Product>
 {
     typedef I64u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -35,8 +35,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Product>::NAME, VLDBDemo::Product>
 {
     typedef String FieldType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -54,8 +54,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Product>::TYPE, VLDBDemo::Product>
 {
     typedef Enum FieldType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -73,8 +73,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Product>::RETAIL_PRICE, VLDBDemo::Product>
 {
     typedef Decimal FieldType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Product, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {

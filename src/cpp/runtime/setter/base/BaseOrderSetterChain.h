@@ -9,6 +9,7 @@
 #include "record/OrderUtil.h"
 #include "runtime/provider/range/ConstRangeProvider.h"
 #include "runtime/provider/reference/ClusteredReferenceProvider.h"
+#include "runtime/provider/value/CallbackValueProvider.h"
 #include "runtime/provider/value/ClusteredValueProvider.h"
 #include "runtime/provider/value/ConstValueProvider.h"
 #include "runtime/provider/value/ContextFieldValueProvider.h"
@@ -45,7 +46,7 @@ public:
     typedef RandomValueProvider< Enum, Order, CombinedPrFunction<Enum>, 0 > ValueProvider04Type;
     typedef FieldSetter< Order, RecordTraits<Order>::STATUS, ValueProvider04Type > SetStatusType;
     // runtime components for setter `set_total_price`
-    typedef ConstValueProvider< Decimal, Order > ValueProvider05Type;
+    typedef CallbackValueProvider< Decimal, Order, BaseOrderSetterChain > ValueProvider05Type;
     typedef FieldSetter< Order, RecordTraits<Order>::TOTAL_PRICE, ValueProvider05Type > SetTotalPriceType;
     // runtime components for setter `set_order_date`
     typedef RandomValueProvider< Date, Order, UniformPrFunction<Date>, 0 > ValueProvider06Type;
@@ -66,7 +67,7 @@ public:
         _setCustomer(_referenceProvider01),
         _valueProvider04(config.function< CombinedPrFunction<Enum> >("Pr[order.status]")),
         _setStatus(_valueProvider04),
-        _valueProvider05(0),
+        _valueProvider05(*this, &BaseOrderSetterChain::setTotalPrice, 0),
         _setTotalPrice(_valueProvider05),
         _valueProvider06(config.function< UniformPrFunction<Date> >("Pr[order.order_date]")),
         _setOrderDate(_valueProvider06),
@@ -114,6 +115,8 @@ public:
 
         return result;
     }
+
+    virtual Decimal setTotalPrice(const AutoPtr<Order>& recordPtr, RandomStream& random) = 0;
 
 protected:
 

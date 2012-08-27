@@ -16,8 +16,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::PK, VLDBDemo::Lineitem>
 {
     typedef I64u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -35,8 +35,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::QUANTITY, VLDBDemo::Lineitem>
 {
     typedef I16u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -54,8 +54,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::PRICE, VLDBDemo::Lineitem>
 {
     typedef Decimal FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -73,8 +73,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::TAX, VLDBDemo::Lineitem>
 {
     typedef Decimal FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -92,8 +92,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::DISCOUNT, VLDBDemo::Lineitem>
 {
     typedef Decimal FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -111,8 +111,8 @@ template<>
 struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::SHIP_DATE_OFFSET, VLDBDemo::Lineitem>
 {
     typedef I16u FieldType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, FieldType>::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -131,8 +131,8 @@ struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::ORDER, VLDBDemo::Line
 {
     typedef VLDBDemo::Order FieldType;
     // record field getter / setter types
-    typedef typename MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {
@@ -151,8 +151,8 @@ struct RecordFieldTraits<RecordTraits<VLDBDemo::Lineitem>::PRODUCT, VLDBDemo::Li
 {
     typedef VLDBDemo::Product FieldType;
     // record field getter / setter types
-    typedef typename MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Setter FieldSetterType;
-    typedef typename MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Getter FieldGetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Setter FieldSetterType;
+    typedef MethodTraits<VLDBDemo::Lineitem, AutoPtr<FieldType> >::Getter FieldGetterType;
 
     static inline FieldSetterType setter()
     {

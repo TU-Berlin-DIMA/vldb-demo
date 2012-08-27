@@ -33,7 +33,17 @@ namespace Myriad {
 template<>
 inline void OutputTraits<VLDBDemo::Customer>::CollectorType::serialize(OutputTraits<VLDBDemo::Customer>::CollectorType::StreamType& out, const VLDBDemo::Customer& record)
 {
-    OutputTraits<VLDBDemo::BaseCustomer>::CollectorType::serialize(out, record);
+    write(out, record.pk(), false);
+    out << '|';
+    write(out, record.firstNameEnumValue(), false);
+    out << '|';
+    write(out, record.lastNameEnumValue(), false);
+    out << '|';
+    write(out, record.genderEnumValue(), false);
+    out << '|';
+    write(out, record.age(), false);
+    out << '|';
+    out << '\n';
 }
 
 } // namespace Myriad

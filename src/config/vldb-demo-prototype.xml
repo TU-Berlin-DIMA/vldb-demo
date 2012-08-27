@@ -7,7 +7,7 @@
     <parameter key="customer.sequence.base_cardinality">10000</parameter>
     <parameter key='customer.sequence.max_orders_per_customer'>50</parameter>
     <parameter key='order.sequence.max_lineitems_per_order'>50</parameter>
-    <parameter key='product.sequence.base_cardinality'>50000</parameter>
+    <parameter key='product.sequence.base_cardinality'>500000</parameter>
   </parameters>
 
   <!-- function configuration -->
@@ -258,8 +258,15 @@
         </setter>
         <setter key='set_total_price' type='field_setter'>
           <argument key='field' type='field_ref' ref='order:total_price' />
+          <!--
           <argument key='value' type='const_value_provider'>
-            <argument key='value' type='Decimal' value='0' /> <!-- FIXME -->
+            <argument key='value' type='Decimal' value='0' />
+          </argument>
+          -->
+          <argument key='value' type='callback_value_provider'>
+            <argument key='type' type='String' value='Decimal' />
+            <argument key='name' type='String' value='setTotalPrice' />
+            <argument key='arity' type='I16u' value='0' />
           </argument>
         </setter>
         <setter key='set_order_date' type='field_setter'>
